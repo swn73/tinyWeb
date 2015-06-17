@@ -3,6 +3,8 @@
 
 void doit(int fd);
 
+int listenfd, connfd, port;
+
 int main(int argc, char **argv) {
 
     /*
@@ -11,7 +13,6 @@ int main(int argc, char **argv) {
     Signal(SIGCHLD,sig_handler_ECHILD);
 
 
-    int listenfd, connfd, port;
     socklen_t clientlen;
     struct sockaddr_in clientaddr;
 
@@ -26,7 +27,6 @@ int main(int argc, char **argv) {
         clientlen = sizeof(clientaddr);
         connfd = accept(listenfd, (SA *) &clientaddr, &clientlen);
         doit(connfd);
-        Close(connfd);
     }
 }
 

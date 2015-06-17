@@ -10,6 +10,8 @@
 #include"rio.h"
 #include"comm_head.h"
 
+extern int listenfd;
+
 int open_clientfd(char *hostname, int port) {
     int clientfd;
     struct hostent *hp;
@@ -153,11 +155,16 @@ void serve_static(int fd,char *filename,int filesize)
     sprintf(buf,"%sContent-Type:%s\r\n\r\n",buf,filetype);
     Rio_writen(fd,buf,strlen(buf));
 
-    srcfd=Open(filename,O_RDONLY,0);
-    srcp=(char*)malloc(filesize);
-    Rio_readn(srcfd,srcp,filesize);
-    Rio_writen(fd,srcp,filesize);
-    free(srcp);
+    if(Fork()==0)
+    {
+        close(listenfd);
+        srcfd=Open(filename,O_RDONLY,0);
+        srcp=(char*)malloc(filesize);
+        Rio_readn(srcfd,srcp,filesize);
+        Rio_writen(fd,srcp,filesize);
+        free(srcp);
+    }
+    close(fd);
     return;
 }
 void serve_dynamic(int fd,char *filename,char *args)
@@ -171,10 +178,12 @@ void serve_dynamic(int fd,char *filename,char *args)
 
     if(Fork()==0)
     {
+        close(listenfd);
         setenv("QUERY_STRING",args,1);
         Dup2(fd,STDOUT_FILENO);
         Execve(filename,emptylist,environ);
     }
+    close(fd);
 }
 
 #endif //TINYWEB_CORE_H
