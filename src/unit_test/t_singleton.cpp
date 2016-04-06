@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  main.cpp
+ *       Filename:  t_singleton.cpp
  *
- *    Description:  main.cpp
+ *    Description:  unit test of singleton
  *
  *        Version:  1.0
- *        Created:  2016/03/29 18时49分17秒
+ *        Created:  2016/04/06 11时52分02秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,8 +16,16 @@
  * =====================================================================================
  */
 
+#include "../base/singleton.hpp"
+#include <iostream>
+#include <thread>
 
-#include	<stdlib.h>
+class A{
+public:
+  int d;
+  char c;
+  A():d(8),c('@'){}
+};
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -27,18 +35,8 @@
  */
 int main ( int argc, char *argv[] )
 {
-    // do config
-    //
-
-    // set signal handler
-    // SIGCHLD
-
-    // init env
-    //
-
-    // main loop
-    // ......
-
-    return EXIT_SUCCESS;
+  
+  std::cout<<xhl::Singleton<A>::getInstance().d<<std::endl;
+  
+  return 0;
 }				/* ----------  end of function main  ---------- */
-

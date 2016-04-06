@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  singleton.hpp
+ *       Filename:  rb_tree.hpp
  *
- *    Description:  singleton holder
+ *    Description:  rb tree
  *
  *        Version:  1.0
- *        Created:  2016/04/03 17时22分58秒
+ *        Created:  2016/04/06 15时16分34秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,33 +16,29 @@
  * =====================================================================================
  */
 
-#ifndef SINGLETON_H
-#define SINGLETON_H
+#include <map>
+
 
 namespace xhl{
-  /* 
+
+  /*
    * =====================================================================================
-   *        Class:  Singleton
-   *  Description:  singleton
+   *        Class:  RbTree
+   *  Description:  rb tree
    * =====================================================================================
    */
-  template < class T >
-    class Singleton
+  template < class Key, class Value >
+    class RbTree
     {
       public:
-        // ====================  LIFECYCLE     =======================================
-        Singleton (){};                                               /* constructor      */
-        Singleton ( const Singleton &other ) = delete;                /* copy constructor */
-        ~Singleton ();                                                /* destructor       */
-
-        /* ====================  OPERATORS     ======================================= */
-        Singleton& operator = ( const Singleton &other ) = delete;    // assignment operator
+        /* ====================  LIFECYCLE     ======================================= */
+        RbTree ();                             /* constructor */
 
         /* ====================  ACCESSORS     ======================================= */
-        static T& getInstance(){
-          static T instance;
-          return instance;
-        }
+
+        /* ====================  MUTATORS      ======================================= */
+
+        /* ====================  OPERATORS     ======================================= */
 
       protected:
         /* ====================  METHODS       ======================================= */
@@ -53,7 +49,7 @@ namespace xhl{
         /* ====================  METHODS       ======================================= */
 
         /* ====================  DATA MEMBERS  ======================================= */
+        std::map<Key,Value> tree;
 
-    }; /* -----  end of template class Singleton  ----- */
+    }; /* ----------  end of template class RbTree  ---------- */
 }
-#endif // SINGLETON_H

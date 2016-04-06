@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/hualin/github/tinyWeb/src/base/singleton.hpp
+
+/Users/hualin/github/tinyWeb/src/unit_test/t_singleton.cpp
+../base/singleton.hpp
+/Users/hualin/github/tinyWeb/src/base/singleton.hpp
+iostream
+-
+

@@ -1,0 +1,2 @@
+/Users/hualin/github/tinyWeb/build/CMakeFiles/tinyWeb.dir
+/Users/hualin/github/tinyWeb/build/unit_test/CMakeFiles/t_singleton.dir
